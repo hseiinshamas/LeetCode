@@ -1,37 +1,20 @@
 class Solution {
     public int search(int[] nums, int target) {
     
-        
-        int low = 0; 
-        int high  = nums.length-1; 
-        
-        return binarySearch(nums, target , low , high);
-         
-     }
-    
-     int binarySearch(int array[], int element, int low, int high) {
-
-    // Repeat until the pointers low and high meet each other
-    while (low <= high) {
-
-      // get index of mid element
-      int mid = low + (high - low) / 2;
-
-      // if element to be searched is the mid element
-      if (array[mid] == element)
-        return mid;
-
-      // if element is less than mid element
-      // search only the left side of mid
-      if (array[mid] < element)
-        low = mid + 1;
-
-      // if element is greater than mid element
-      // search only the right side of mid
-      else
-        high = mid - 1;
+       if(nums == null || nums.length == 0) return -1;
+        int start = 0;
+        int end = nums.length-1;
+        return binarySearch(nums, target, start, end);
     }
-
-    return -1;
-  }
+    
+    private int binarySearch(int[] nums, int target, int start, int end){
+        if(start > end) return -1;
+        int mid = start+(end-start)/2;
+         if(nums[mid] == target) return mid;
+        if(target < nums[mid]){
+                return binarySearch(nums, target, start, mid-1);
+        } else {
+                return binarySearch(nums, target, mid+1, end);
+        }
+    }
 }
