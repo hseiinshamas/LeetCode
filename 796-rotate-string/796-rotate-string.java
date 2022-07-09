@@ -1,8 +1,6 @@
 class Solution {
     public boolean rotateString(String s, String goal) {
-        if(s.length()!= goal.length())
-            return false;
-        String end = s+s; 
-        return end.contains(goal);
+        return (s.length() == goal.length() && (s+s).contains(goal));
+        // s+s contains every possible shift to the left
     }
 }
