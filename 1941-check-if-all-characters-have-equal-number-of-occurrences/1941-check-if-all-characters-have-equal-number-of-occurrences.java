@@ -1,16 +1,14 @@
 class Solution {
     public boolean areOccurrencesEqual(String s) {
-       HashMap<Character, Integer> map = new HashMap<>();
-
+       int[] arr = new int[26];
 		for (char c : s.toCharArray())
-			map.put(c, map.getOrDefault(c, 0) + 1);// get the frequency
+			arr[c - 'a']++;
 
-		int n = map.get(s.charAt(0));
-		for (int i = 0; i < s.length(); i++) {
-			if(n!=map.get(s.charAt(i)))
+		int prev = arr[s.charAt(0) - 'a'];
+		for (int i : arr) {
+			if (i != 0 && i != prev)
 				return false;
 		}
-		
-		return true; 
+		return true;
     }
 }
