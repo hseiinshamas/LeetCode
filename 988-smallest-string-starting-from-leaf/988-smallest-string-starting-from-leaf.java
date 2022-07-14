@@ -14,33 +14,27 @@
  * }
  */
 class Solution {
+    String ans = "~";
 
     public String smallestFromLeaf(TreeNode root) {
-        if (root == null) return "";
-        Deque<TreeNode> stack = new LinkedList();
-        Deque<String> sumStack = new LinkedList();
-        String smalleststr = "";
-        char c = (char) (root.val + 97);
-        stack.push(root);
-        sumStack.push(c + "");
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            String val = sumStack.pop();
-            if (node.left == null && node.right == null) {
-                if (smalleststr.equals("")) smalleststr = val;
-                if (val.compareTo(smalleststr) < 0) smalleststr = val;
-            }
-            if (node.left != null) {
-                char ch = (char) (node.left.val + 97);
-                sumStack.push(ch + val);
-                stack.push(node.left);
-            }
-            if (node.right != null) {
-                char ch = (char) (node.right.val + 97);
-                sumStack.push(ch + val);
-                stack.push(node.right);
-            }
+        dfs(root, new StringBuilder());
+        return ans;
+    }
+
+    public void dfs(TreeNode node, StringBuilder sb) {
+        if (node == null) return;
+        sb.append((char) ('a' + node.val));
+
+        if (node.left == null && node.right == null) {
+            sb.reverse();
+            String S = sb.toString();
+            sb.reverse();
+
+            if (S.compareTo(ans) < 0) ans = S;
         }
-        return smalleststr;
+
+        dfs(node.left, sb);
+        dfs(node.right, sb);
+        sb.deleteCharAt(sb.length() - 1);
     }
 }
