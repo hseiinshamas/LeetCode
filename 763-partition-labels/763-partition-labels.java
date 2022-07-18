@@ -1,26 +1,33 @@
 class Solution {
+
     public List<Integer> partitionLabels(String s) {
-       
-        Map<Character, Integer> map = new HashMap<>();
-        // filling impact of character's
-        for(int i = 0; i < s.length(); i++){
-            char ch = s.charAt(i);
-            map.put(ch, i);
+        List<Integer> partitionLengths = new ArrayList<>();
+        int[] lastOccurrence = new int[26];
+
+        //standard noting of lastOccurance of lowercase alph in a String.
+        for (int i = 0; i < s.length(); i++) {
+            lastOccurrence[s.charAt(i) - 'a'] = i;
         }
-        // making of result
-        List<Integer> res = new ArrayList<>();
-        int prev = -1;
-        int max = 0;
-        
-        for(int i = 0; i < s.length(); i++){
-            char ch = s.charAt(i);
-            max = Math.max(max, map.get(ch));
-            if(max == i){
-                // partition time
-                res.add(max - prev);
-                prev = max;
+
+        //starting from first letter
+        int i = 0;
+        while (i < s.length()) {
+            //lastOccurrence of first letter
+            int end = lastOccurrence[s.charAt(i) - 'a'];
+            //edge case(start==end that means only 1 char)
+            if (i == end) {
+                partitionLengths.add(1);
+                i++;
+            } else {
+                //start j from next to i
+                int j = i + 1;
+                while (j != end) { //loop until we find lastindesxes of all chars in substring
+                    end = Math.max(end, lastOccurrence[s.charAt(j++) - 'a']);
+                }
+                partitionLengths.add(j - i + 1);
+                i = j + 1;
             }
         }
-        return res;
-    }       
+        return partitionLengths;
+    }
 }
