@@ -1,15 +1,21 @@
 class Solution {
 
     public double average(int[] salary) {
-        double sum = 0;
-        int count = 0;
+       int n = salary.length;
+		int min = salary[0];
+        int max = salary[0];
+        int sum = salary[0];
 
-        Arrays.sort(salary);
-
-        for (int i = 1; i < salary.length - 1; i++) {
-            sum += salary[i];
-            count++;
+        for (int i = 1; i < n; ++i) {
+            if (salary[i] < min) {
+                min = salary[i];
+            } else if (salary[i] > max) {
+                max = salary[i];
+            }
+			
+			sum += salary[i];
         }
-        return sum / count;
+        
+        return (double)(sum - min - max) / (n - 2);
     }
 }
