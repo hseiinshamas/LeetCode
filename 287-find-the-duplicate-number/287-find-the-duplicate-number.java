@@ -2,16 +2,21 @@ class Solution {
 
     public int findDuplicate(int[] nums) {
        
-        int dup = nums.length; 
-        
-        for(int i : nums) {
-            int index = Math.abs(i);
-            if(nums[index] < 0){
-                return index; 
+     if(nums.length ==0 )
+                return 0;
+            int slow=0, fast=0;
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            while(slow != fast){
+                slow = nums[slow];
+                fast = nums[nums[fast]];
             }
-            nums[index] = -nums[index];
-        }
-        return dup ;
+            fast = 0;
+            while(slow != fast){
+                slow = nums[slow];
+                fast = nums[fast];
+            }
+            return slow;
         
     }
 }
