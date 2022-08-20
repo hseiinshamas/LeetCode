@@ -20,7 +20,7 @@ class Solution {
                 start = mid + 1;
             } else if (mid_element > target) {
                 end = mid - 1;
-            } else if (mid_element == target) {
+            } else  {
                 return true;
             }
         }
