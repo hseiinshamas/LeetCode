@@ -1,20 +1,20 @@
 class Solution {
-
     public List<Integer> addToArrayForm(int[] num, int k) {
-        List<Integer> res = new ArrayList<>();
-        int sum = k;
-
-        int i = num.length;
-        while (--i >= 0 || sum > 0) {
-            if (i >= 0) {
-                sum += num[i];
+        
+        final LinkedList<Integer> result = new LinkedList<>();
+        int len = num.length - 1;
+        
+        while(len >= 0 || k != 0){
+            
+            if(len >= 0){
+                k += num[len--];
             }
-
-            res.add(sum % 10);
-            sum = sum / 10;
+            
+            result.addFirst(k % 10);
+            k /= 10;
         }
-
-        Collections.reverse(res);
-        return res;
+            
+        return result;
+        
     }
 }
