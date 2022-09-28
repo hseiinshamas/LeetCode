@@ -18,7 +18,8 @@ class Solution {
             fast = fast.next;
         }
         
-        if (fast == null) return head.next;
+        if (fast == null) return head.next; // we can remove this line and add a new node curr and assign curr to head and then assign slow and fast to curr and curr.next to head;
+        
         while (fast.next != null) {
             slow = slow.next;
             fast = fast.next;
